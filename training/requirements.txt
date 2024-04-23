@@ -1,0 +1,8 @@
+tensorflow 
+split-folders 
+matplotlib 
+opencv-python 
+spicy 
+tf2onnx
+onnx
+onnx_tensorrt
