@@ -24,8 +24,14 @@ data_folder = "MaizeClassification"
 # split data in a new folder named data-split
 splitfolders.ratio(data_folder, output="data-split", seed=1337, ratio=(0.7, 0.2, 0.1), group_prefix=None, move=False)
 
-datagen = ImageDataGenerator()
-
+datagen = ImageDataGenerator(
+    rotation_range=30,
+    width_shift_range=0.2,
+    height_shift_range=0.2,
+    shear_range=0.2,
+    zoom_range=0.2,
+    horizontal_flip=True,
+    fill_mode='nearest')
 # define classes name
 class_names = os.listdir(data_folder)
 

@@ -1,0 +1,5 @@
+tensorflow
+tritonclient[all]
+numpy
+fastapi
+uvicorn
