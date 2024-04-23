@@ -1,5 +1,8 @@
 tensorflow
-tritonclient[all]
 numpy
 fastapi
 uvicorn
+onnxruntime-gpu==1.16.0 
+cuda-python==11.8.3 
+tensorrt==8.6.1.post1
+nvidia-cudnn-cu11==8.5.0.96

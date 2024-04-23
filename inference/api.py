@@ -2,11 +2,13 @@ from fastapi import FastAPI, UploadFile, File, HTTPException
 #from typing import List
 #from typing import Union, Optional
 from pydantic import BaseModel
-from predict import onnx_inference as inf
+from predict import onnx_backend
 import uvicorn
 import json
 
 app = FastAPI()
+inference_object = onnx_backend()
+
 WORKERS = 4
 
 class INFER(BaseModel):
@@ -16,7 +18,7 @@ class INFER(BaseModel):
 @app.post("/infer")
 async def inference(infer: INFER):
 	try:
-		ret = inf(infer.image)
+		ret = inference_object.onnx_inference(infer.image)
 		if ret:
 			return json.dumps({"success": True,"status_code": 200,"message": f"{ret}"})
 		else:
@@ -27,4 +29,4 @@ async def inference(infer: INFER):
 
 
 if __name__ == "__main__":
-	uvicorn.run("api:app", port=8000, host="0.0.0.0", workers=1)
+	uvicorn.run("api:app", port=8000, host="0.0.0.0", workers=2)
