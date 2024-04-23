@@ -29,4 +29,4 @@ async def inference(infer: INFER):
 
 
 if __name__ == "__main__":
-	uvicorn.run("api:app", port=8000, host="0.0.0.0", workers=2)
+	uvicorn.run("api:app", port=12000, host="0.0.0.0", workers=2)

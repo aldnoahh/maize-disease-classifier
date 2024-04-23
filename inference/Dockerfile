@@ -5,6 +5,7 @@ FROM nvidia/cuda:12.2.0-base-ubuntu20.04
 ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ=Asia/Calcutta
 
+EXPOSE 12000
 # Update package list and install required packages
 RUN <<EOF
 # apt-get update
