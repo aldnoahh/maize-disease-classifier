@@ -1,3 +1,6 @@
+"""
+sudo docker run --rm --runtime=nvidia --shm-size=12g --ulimit memlock=-1 --ulimit stack=67108864 --name triton --gpus=1 --rm -p8000:8000 -p8001:8001 -p8002:8002 -v/home/ubuntu/models:/models nvcr.io/nvidia/tritonserver:22.12-py3 tritonserver --model-repository=/models --strict-model-config=false --log-verbose=1
+"""
 import tritonclient.grpc as grpc_client
 from tritonclient.utils import triton_to_np_dtype
 import numpy as np
@@ -11,7 +14,7 @@ model_width = 224
 
 DATA_TYPE = "FP32"
 
-triton_url = "localhost:801"
+triton_url = "triton:8001"
 triton_client = grpc_client.InferenceServerClient(url=triton_url)
 
 
