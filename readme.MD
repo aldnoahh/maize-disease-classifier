@@ -25,11 +25,11 @@ sudo docker run --rm -dit --name maize -p12000:12000 inference:latest
 ```
 Wait for 1-2 mins.
 
-3. Test run </br>
-3.1 Check if APIs working
-3.1.1 Go to `localhost:12000/docs` on web browser to check Swagger UI
-3.1.2 Run 'curl localhost:12000' on terminal. It should return `{"detail":"Not Found"}`
-3.2 Test using CURL with a base64 image
+3. Test run </br> </br>
+3.1 Check if APIs working </br>
+3.1.1 Go to `localhost:12000/docs` on web browser to check Swagger UI   </br>
+3.1.2 Run 'curl localhost:12000' on terminal. It should return `{"detail":"Not Found"}`    </br>
+3.2 Test using CURL with a base64 image 
 ```
 cd maize-issue-classifier/inference/misc
 bash curl-test-broken.sh
@@ -37,9 +37,9 @@ bash curl-test-broken.sh
 
 
 ## API
-- Endpoint: `localost:12000/infer`
-- Json Payload: `{ "image" : "BASE64 Encoded String" }`
-- Resposes: 
-a. Successful: {"success": true,"status_code": 200,"message": "Class Name"}
-b. Unsucessful: ({"success": false,"status_code": 400,"message": "Unable to Recognize"})
-c. Exception: {"success": false, "status_code": 404, "message": "Error in inference: Message"}
+- Endpoint: `localost:12000/infer`   </br>
+- Json Payload: `{ "image" : "BASE64 Encoded String" }`   </br>  </br>
+- Resposes:  </br>
+a. Successful: {"success": true,"status_code": 200,"message": "Class Name"} </br>
+b. Unsucessful: ({"success": false,"status_code": 400,"message": "Unable to Recognize"}) </br>
+c. Exception: {"success": false, "status_code": 404, "message": "Error in inference: Message"} </br>
