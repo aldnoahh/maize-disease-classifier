@@ -5,18 +5,25 @@ import tritonclient.grpc as grpc_client
 from tritonclient.utils import triton_to_np_dtype
 import numpy as np
 import tensorflow as tf
+import onnxruntime as rt
+
+class_names = ['Broken','Foreign','Insect','Mold']
+
 
 MODEL_NAME = "resnet"
 MODEL_VERSION = "1"
 model_height = 224
 model_width = 224
-
-
 DATA_TYPE = "FP32"
-
 triton_url = "triton:8001"
 triton_client = grpc_client.InferenceServerClient(url=triton_url)
 
+###### ONNX ############
+model_path = "model.onnx"
+sess = rt.InferenceSession(model_path) #,providers = ['CUDAExecutionProvider'])
+# Get input details
+input_name = sess.get_inputs()[0].name
+input_shape = sess.get_inputs()[0].shape
 
 def preprocess_and_decode(img_str, new_shape=[224,224]):
     img = tf.io.decode_base64(img_str)
@@ -47,3 +54,28 @@ def triton_inference(image):
 
 
     return output_stream
+
+
+
+def onnx_inference(image):
+    #img = tf.keras.preprocessing.image.load_img('broken.png', target_size=(224, 224))
+    img = preprocess_and_decode(image)
+    img_array = tf.keras.preprocessing.image.img_to_array(img)
+    input_data = np.array([img_array])
+    # Run inference
+    outputs = sess.run(None, {input_name: input_data})
+
+    # Get the output data
+    output_name = sess.get_outputs()[0].name
+    output_data = outputs[0]
+
+    # Process the output data (e.g., print results, make decisions)
+    #print(f"Output for {input_name}: {output_data}")
+
+    #generate argmax for predictions
+    class_id = np.argmax(output_data, axis = 1)
+    #print(class_id)
+    # transform classes number into classes name
+    #print(class_names[class_id.item()])
+    return class_names[class_id.item()]
+
