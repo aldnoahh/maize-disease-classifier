@@ -25,7 +25,7 @@ sudo docker run --rm -dit --name maize -p12000:12000 inference:latest
 ```
 Wait for 1-2 mins.
 
-3. Test run
+3. Test run </br>
 3.1 Check if APIs working
 3.1.1 Go to `localhost:12000/docs` on web browser to check Swagger UI
 3.1.2 Run 'curl localhost:12000' on terminal. It should return `{"detail":"Not Found"}`
