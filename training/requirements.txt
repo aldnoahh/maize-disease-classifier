@@ -6,3 +6,4 @@ spicy
 tf2onnx
 onnx
 onnx_tensorrt
+tensorrt
